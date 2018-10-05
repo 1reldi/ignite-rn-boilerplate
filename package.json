@@ -29,6 +29,7 @@
 		"standard": "^8.6.0"
 	},
 	"dependencies": {
+		"fs": "0.0.1-security",
 		"ramda": "^0.23.0"
 	}
 }

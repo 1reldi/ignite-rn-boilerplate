@@ -1,5 +1,5 @@
-// @cliDescription  Generate a screen
-// Generates a "screen"
+// @cliDescription  Generate a component
+// Generates a "component"
 const fs = require('fs');
 
 module.exports = async function(context) {
@@ -9,7 +9,7 @@ module.exports = async function(context) {
 
   // validation
   if (isBlank(parameters.first)) {
-    print.info(`ignite generate screen <name>\n`);
+    print.info(`ignite generate component <name>\n`);
     print.info('A name is required.');
     return;
   }
@@ -18,8 +18,8 @@ module.exports = async function(context) {
   const props = { name };
 
   fs.appendFile(
-    'src/Containers/index.js',
-    `export { default as ${name} } from './${name}/${name}';${'\n'}`,
+    'src/Components/index.js',
+    `export * from './${name}/${name}';${'\n'}`,
     err => {
       if (err) {
         console.log(err);
@@ -27,20 +27,20 @@ module.exports = async function(context) {
     }
   );
 
-  // Copies the `screen.js.ejs` in your plugin's templates folder
+  // Copies the `component.js.ejs` in your plugin's templates folder
   // into App/Things/${name}.js.
   const jobs = [
     {
-      template: 'screen.js.ejs',
-      target: `src/Containers/${name}/${name}.js`
+      template: 'component.js.ejs',
+      target: `src/Components/${name}/${name}.js`
     },
     {
       template: 'styles.js.ejs',
-      target: `src/Containers/${name}/styles.js`
+      target: `src/Components/${name}/styles.js`
     }
   ];
 
   // make the templates and pass in props with the third argument here
   await ignite.copyBatch(context, jobs, props);
 };
-//cd .. && ignite new MyAwesomeApp -b ./ignite-rn-boilerplate/ && cd MyAwesomeApp/ && ignite generate screen Hwllo
+//cd .. && ignite new MyAwesomeApp -b ./ignite-rn-boilerplate/ && cd MyAwesomeApp/ && ignite generate component Hwllo
