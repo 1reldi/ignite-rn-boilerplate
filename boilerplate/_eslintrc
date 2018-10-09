@@ -1,3 +1,15 @@
 {
-  "extends": "rallycoding"
+  "extends": "rallycoding",
+  "globals": {
+    "require": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/imports-first": "off"
+  }
 }

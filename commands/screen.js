@@ -17,15 +17,27 @@ module.exports = async function(context) {
   const name = pascalCase(parameters.first);
   const props = { name };
 
-  fs.appendFile(
-    'src/Containers/index.js',
-    `export { default as ${name} } from './${name}/${name}';${'\n'}`,
-    err => {
-      if (err) {
-        console.log(err);
-      }
+  var data = fs
+    .readFileSync('src/Containers/index.js')
+    .toString()
+    .split('\n');
+  data.splice(0, 0, `export { default as ${name} } from './${name}/${name}';`);
+  var text = data.join('\n');
+  fs.writeFile('src/Containers/index.js', text, err => {
+    if (err) {
+      console.log(err);
     }
-  );
+  });
+
+  // fs.appendFile(
+  //   'src/Containers/index.js',
+  //   `export { default as ${name} } from './${name}/${name}';${'\n'}`,
+  //   err => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // );
 
   // Copies the `screen.js.ejs` in your plugin's templates folder
   // into App/Things/${name}.js.

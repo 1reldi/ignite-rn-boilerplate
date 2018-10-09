@@ -1,3 +1,7 @@
-const images = {};
+/* eslint-disable global-require */
 
-export default images;
+const Images = {
+  //logo: require('Assets/Images/logo.png')
+};
+
+export default Images;

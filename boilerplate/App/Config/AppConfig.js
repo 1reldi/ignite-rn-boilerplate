@@ -1,4 +1,5 @@
 export default {
   useFixtures: false,
-  allowTextFontScaling: false
+  allowTextFontScaling: false,
+  setLayoutAnimationEnabled: true
 };
